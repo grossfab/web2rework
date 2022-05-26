@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Bootstrap: Latest compiled and minified CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!--jQuery library-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--Bootstrap: Popper JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!--Bootstrap: Latest compiled JavaScript-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--Montserrat-Schrift importieren-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!--Eigener JS-File-->
+    <script src="lib/js1.js"></script>
+    <!--Eigener CSS-File-->
+    <link rel="stylesheet" type="text/css" href="lib/css1.css">
+
+    <title>hafen albstadt-sigmaringen</title>
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-sm fixed-top bg-1 navbar-dark">
+            <a class="navbar-brand" href="index.html">hafen albsig</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+           
+           <div class="collapse navbar-collapse" id="collapsibleNavbar">
+               <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">home</a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="hafen.html">hafen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="betreiber.html">betreiber</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="buchen.html">buchen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active-page" href="admin.html">admin</a>
+                    </li>
+               </ul>
+           </div>
+        </nav>
+        <main>
+            <section class="container-fluid bg-2">
+                <div class="row">
+                    <section class="col-md-9">
+                        <p class="margin"></p>
+                        <h3 class="margin">Buchungsübersicht</h3>
+                        <div class="table-responsive-md">
+                            <table class="table" id="datentabelle">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nachname</th>
+                                        <th scope="col">Vorname</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Handynummer</th>
+                                        <th scope="col">Beginn</th>
+                                        <th scope="col">Ende</th>
+                                        <th scope="col">Bootslänge</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section class="col-md">
+                        <p class="margin"></p>
+                        <h3 class="margin align-left">Buchungsanfragen bearbeiten:</h3>
+                        <form id="single-delete">
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="del-id" class="float-left">Zu löschende ID:</label>
+                                    <input type="text" class="form-control " id="del-id" placeholder="ID eingeben" name="del-id" required>
+                                    <p></p>
+                                    <button id="delete-by-id" class="btn btn-secondary float-left">Einzelne Anfrage löschen</button>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </form>
+                        <form id="all-delete">
+                            <div class="row">
+                                <div class="col-md">
+                                    <p></p>
+                                    <button id="delete-all" class="btn btn-secondary float-left">Alle Anfragen löschen</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </section>
+        </main>
+        <footer class="container-fluid bg-3">
+            <p>&copy; hafen-albsig2022</p>
+        </footer>
+        <!-- 
+        <script>
+            $(document).ready(function() {
+            console.log('Document ready, loading data from Service');
+
+            $.ajax({
+                url: 'http://localhost:8000/api/buchungsanfrage/alle',
+                method: 'get',
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+				dataType: 'json'
+            }).done(function (response) {
+                console.log('Data loaded successfully');
+                console.log(response);
+
+                /* die Idee bei diesem Prinzip ist, dass HTML Code als Text angesehen wird. 
+                    Diesen können wir häppchen-weise in einer Variable zusammen setzen 
+                    und dann auch ausgeben 
+                    Hinweis: Damit man Quotes/doppelte Anführungsstriche NICHT escapen muss, 
+                    kann man bei jQuery einfache Anführungszeichen verwenden    
+                */
+                    
+                // hilfsvariable anlegen
+                var content = '';
+
+                for (i = 0; i < response.length; i++) {
+                    var obj = response[i];
+
+                    content += '<tr>';
+                    content += '<td>' + obj.id + '</td>';
+                    content += '<td>' + obj.bezeichnung + '</td>';
+                    content += '<td>' + obj.steuerSatz.toFixed(2) + ' %</td>';
+                    content += '</tr>';
+                }
+
+                content += '</table>';
+
+                // zusammengesetzen Code im Dokument ausgeben
+                $('#datentabelle').append(content);
+                
+            }).fail(function (jqXHR, statusText, error) {
+                console.log('Error occured');
+                console.log('Response Code: ' + jqXHR.status + ' - Message: ' + jqXHR.responseText);
+                alert(jqXHR.responseText);
+            });
+        });
+        </script>
+        -->
+  </body>
+</html>
