@@ -1,4 +1,4 @@
-const helper = require('../helper.js');
+const helper = require('../services/helper.js');
 
 class BuchungsanfrageDao {
 

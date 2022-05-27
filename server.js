@@ -1,5 +1,5 @@
-const helper = require('services/helper.js');
-const fileHelper = require('services/fileHelper.js');
+const helper = require('./services/helper.js');
+const fileHelper = require('./services/fileHelper.js');
 
 //server setup
 const HTTP_PORT = 8000; 
@@ -17,6 +17,7 @@ const Database = require('better-sqlite3');
 const dbOptions = { verbose: console.log };
 const dbFile = './db/webanw2.sqlite';
 const dbConnection = new Database(dbFile, dbOptions);
+
 // provide service router with database connection / store the database connection in global server environment
 app.locals.dbConnection = dbConnection;
 
@@ -37,31 +38,36 @@ app.use(function(request, response, next) {
     response.setHeader('Access-Control-Allow-nHeaders', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
+
 app.use(morgan('dev'));
 
-// binding endpoints
+/* // binding endpoints
 const TOPLEVELPATH = '/api';
 console.log('Binding enpoints, top level Path at ' + TOPLEVELPATH);
-
-var serviceRouter = require('./services/buchungsanfrage.js');
-app.use(TOPLEVELPATH, serviceRouter);
 
 // send default error message if no matching endpoint found
 app.use(function (request, response) {
     console.log('Error occured, 404, resource not found');
     response.status(404).json({'fehler': true, 'nachricht': 'Resource nicht gefunden'});
-});
+}); */
 
-//
-/* var path = require('path');
 
+var path = require('path');
 var logger = require('morgan');
-var indexRouter = require('./routes/index');
 var engines = require('consolidate');
 
 //view engine
+
 app.set('view engine', 'ejs')
+
+//static files
+app.use(express.static('views'));
 app.set('views', __dirname + '/views');
+app.use(express.static('public'));
+app.set('public', __dirname + '/public');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
 //app.engine('html', engines.mustache);
 
 //app.set('view engine', 'html');
@@ -71,24 +77,36 @@ app.use(express.urlencoded({ extended: false }));
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
-//app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public')); */
 
 //router
-
+var indexRouter = require('./routes/index.js');
 app.use('/', indexRouter);
+// var serviceRouter = require('./dao/buchungsanfrageDao.js');
+//app.use(TOPLEVELPATH, serviceRouter); 
 
-app.get('/', (req, res) => {
+app.get('/index', (req, res) => {
     console.log("Home page entered")
-    res.render('index.ejs')
+    res.render('index')
 })
 
-app.get('/', (req, res) => {
-    res.render('hafen.ejs')
+app.get('/betreiber', (req, res) => {
+    res.render('betreiber')
 })
 
+app.get('/hafen', (req, res) => {
+    res.render('hafen')
+})
+
+app.get('/admin', (req, res) => {
+    res.render('admin')
+})
+
+app.get('/buchen', (req, res) => {
+    res.render('buchen')
+})
 
 app.listen(HTTP_PORT, () => {
     console.log('Server started and running at localhost on port ' + HTTP_PORT)
 });
+
 module.exports = app;
