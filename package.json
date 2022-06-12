@@ -1,25 +1,27 @@
 {
-  "name": "web2rework",
+  "name": "webanwendungen2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devStart": "nodemon server.js",
-    "dev": "nodemon ./server.js",
-    "start": "node ./server.js"
+    "devStartFront": "nodemon ./app.js",
+    "startFront": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grossfab/web2rework.git"
+    "url": "git+https://github.com/raysebas24/WebAnwendungen2.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/grossfab/web2rework/issues"
+    "url": "https://github.com/raysebas24/WebAnwendungen2/issues"
   },
-  "homepage": "https://github.com/grossfab/web2rework#readme",
+  "homepage": "https://github.com/raysebas24/WebAnwendungen2#readme",
+  "keywords": [],
   "dependencies": {
     "better-sqlite3": "^7.5.3",
     "body-parser": "^1.20.0",
